@@ -1,0 +1,313 @@
+/* ตั้งค่า box model พื้นฐาน */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* พื้นฐานตัวอักษรและพื้นหลัง */
+:root {
+    --max-width: 1100px;
+    --bg: #f6f8fb;
+    --card-bg: #ffffff;
+    --accent-1: #A73824;
+    --accent-2: #A22824;
+    --muted: #6b7280;
+    --radius: 10px;
+    --gap: 1rem;
+    --transition: 200ms ease;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Noto Sans Thai", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: #222;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.45;
+}
+
+/* กล่องกลาง (container) */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    color: #fff;
+    padding: 1.25rem 0;
+    box-shadow: 0 2px 6px rgba(38, 65, 143, 0.12);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    letter-spacing: 0.2px;
+}
+
+.student-info {
+    text-align: right;
+    font-size: 0.95rem;
+    opacity: 0.98;
+}
+
+.student-info b {
+    display: block;
+}
+
+/* Main content layout */
+main {
+    padding: 1rem 0 2rem 0;
+}
+
+/* Grid ของสถานที่: 2 คอลัมน์บนจอใหญ่ */
+.places {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap);
+}
+
+/* การ์ดแต่ละสถานที่ */
+article.place {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.04);
+    box-shadow: 0 6px 18px rgba(3, 10, 34, 0.03);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+article.place:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(3, 10, 34, 0.06);
+}
+
+article.place h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.05rem;
+}
+
+/* Gallery: 2 รูปต่อแถว */
+.gallery {
+    display: flex;
+    gap: 0.6rem;
+    margin: 0.6rem 0 1rem 0;
+}
+
+.gallery figure {
+    flex: 1 1 0;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #efeff7;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery img {
+    display: block;
+    width: 100%;
+    height: 160px; /* ปรับตามต้องการ */
+    object-fit: cover; /* สำคัญมาก */
+    border: 2px solid rgba(75, 108, 183, 0.06);
+    transition: transform var(--transition);
+}
+
+.gallery figure:hover img {
+    transform: scale(1.03);
+}
+
+/* figcaption */
+.gallery figcaption {
+    padding: 0.45rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    background: rgba(0, 0, 0, 0.02);
+    text-align: left;
+}
+
+/* คำอธิบาย */
+.desc {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    padding: 1rem 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* Accessibility: Focus */
+a:focus {
+    outline: 3px solid rgba(75, 108, 183, 0.25);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* ---------- Media Queries ---------- */
+
+@media (max-width: 1000px) {
+    .gallery img {
+        height: 140px;
+    }
+}
+
+@media (max-width: 800px) {
+    /* เปลี่ยนเป็นคอลัมน์เดียวบนมือถือ */
+    .places {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .gallery img {
+        height: 120px;
+    }
+
+    header .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .student-info {
+        text-align: left;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .gallery img {
+        height: 100px;
+    }
+
+    article.place {
+        padding: 0.8rem;
+    }
+
+    header h1 {
+        font-size: 1.05rem;
+    }
+}
+
+/* ส่วนพิเศษสำหรับการพิมพ์ */
+@media print {
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    .gallery img {
+        height: auto;
+        max-width: 100%;
+    }
+
+    header,
+    footer {
+        display: none;
+    }
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#logoCanvas {
+    width: 110px;
+    height: 110px;
+    border-radius: 12px;
+    background: transparent;
+    display: block;
+}
+
+.title-text h1 {
+    margin: 0;
+}
+
+/* responsive */
+@media (max-width: 800px) {
+    #logoCanvas {
+        width: 80px;
+        height: 80px;
+    }
+}
+#logoCanvas {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ececec;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+}
+
+form input,
+form textarea {
+    margin-top: 0.4rem;
+    padding: 0.6rem 0.7rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    background: #fdfdfd;
+    transition: border-color 0.2s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: var(--accent-1);
+}
+
+form button {
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--accent-1);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 200ms ease;
+}
+
+form button:hover {
+    background: var(--accent-2);
+}
